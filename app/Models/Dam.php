@@ -9,7 +9,7 @@ class Dam extends Model
 {
     use HasFactory;
       protected $fillable = [
-        'tpm',
+        'dam',
         'desa',
         'pemilik',
         'alamat',

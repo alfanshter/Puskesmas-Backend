@@ -36,7 +36,7 @@ class TpmControlller extends Controller
             $tpm = Tpm::create($request->all());
             $response = [
                 'message' => 'tpm berhasil',
-                'data' => $tpm
+                'data' => 1
             ];
 
             return response()->json($response, Response::HTTP_CREATED);
@@ -64,6 +64,17 @@ class TpmControlller extends Controller
     public function readtpmdetail(Request $request)
     {
         $getdata = Tpm::get()->where('id',$request->input('id'))->first();
+          $response = [
+                'message' => 'tpm berhasil',
+                'data' => $getdata
+            ];
+
+            return response()->json($response, Response::HTTP_CREATED);
+    }
+
+    public function readtpmdesa(Request $request)
+    {
+        $getdata = DB::table('tpms')->where('desa',$request->input('desa'))->get();
           $response = [
                 'message' => 'tpm berhasil',
                 'data' => $getdata
@@ -111,6 +122,37 @@ class TpmControlller extends Controller
             
          return response()->json($response, Response::HTTP_OK);
         }
+    }
+
+ public function getdatatpm(Request $request)
+    {
+        $ikl0 =DB::table('tpms')->where('desa',$request->input('desa'))->where('ikl',"Memenuhi Syarat")->count();
+        $ikl1 =DB::table('tpms')->where('desa',$request->input('desa'))->where('ikl',"Tidak Memenuhi Syarat")->count();
+        $sampel0 =DB::table('tpms')->where('desa',$request->input('desa'))->where('ujisampel',"Memenuhi Syarat")->count();
+        $sampel1 =DB::table('tpms')->where('desa',$request->input('desa'))->where('ujisampel',"Tidak Memenuhi Syarat")->count();
+        $sampel2 =DB::table('tpms')->where('desa',$request->input('desa'))->where('ujisampel',"Belum Uji Sampel")->count();
+        $penjamaah0 =DB::table('tpms')->where('desa',$request->input('desa'))->where('sertifikatpenjamaah',"Ada")->count();
+        $penjamaah1 =DB::table('tpms')->where('desa',$request->input('desa'))->where('sertifikatpenjamaah',"Belum Ada")->count();
+        $laiksehat0 =DB::table('tpms')->where('desa',$request->input('desa'))->where('laiksehat',"Ada")->count();
+        $laiksehat1 =DB::table('tpms')->where('desa',$request->input('desa'))->where('laiksehat',"Belum Ada")->count();
+        $izin0 =DB::table('tpms')->where('desa',$request->input('desa'))->where('izinusaha',"Ada")->count();
+        $izin1 =DB::table('tpms')->where('desa',$request->input('desa'))->where('izinusaha',"Belum Ada")->count();
+       
+        $response = [
+                'message' => 'data',
+                'ikl0' => $ikl0,
+                'ikl1' => $ikl1,
+                'sampel0' => $sampel0,
+                'sampel1' => $sampel1,
+                'sampel2' => $sampel2,
+                'penjamaah0' => $penjamaah0,
+                'penjamaah1' => $penjamaah1,
+                'laiksehat0' => $laiksehat0,
+                'laiksehat1' => $laiksehat1,
+                'izin0' => $izin0,
+                'izin1' => $izin1
+            ];
+              return response()->json($response, Response::HTTP_OK);
     }
 
 }
