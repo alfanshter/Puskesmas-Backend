@@ -154,4 +154,35 @@ class DamController extends Controller
               return response()->json($response, Response::HTTP_OK);
     }
 
+    public function getdatadam_all(Request $request)
+    {
+        $ikl0 =DB::table('dams')->where('ikl',"Memenuhi Syarat")->count();
+        $ikl1 =DB::table('dams')->where('ikl',"Tidak Memenuhi Syarat")->count();
+        $sampel0 =DB::table('dams')->where('ujisampel',"Memenuhi Syarat")->count();
+        $sampel1 =DB::table('dams')->where('ujisampel',"Tidak Memenuhi Syarat")->count();
+        $sampel2 =DB::table('dams')->where('ujisampel',"Belum Uji Sampel")->count();
+        $penjamaah0 =DB::table('dams')->where('sertifikatpenjamaah',"Ada")->count();
+        $penjamaah1 =DB::table('dams')->where('sertifikatpenjamaah',"Belum Ada")->count();
+        $laiksehat0 =DB::table('dams')->where('laiksehat',"Ada")->count();
+        $laiksehat1 =DB::table('dams')->where('laiksehat',"Belum Ada")->count();
+        $izin0 =DB::table('dams')->where('izinusaha',"Ada")->count();
+        $izin1 =DB::table('dams')->where('izinusaha',"Belum Ada")->count();
+       
+        $response = [
+                'message' => 'data',
+                'ikl0' => $ikl0,
+                'ikl1' => $ikl1,
+                'sampel0' => $sampel0,
+                'sampel1' => $sampel1,
+                'sampel2' => $sampel2,
+                'penjamaah0' => $penjamaah0,
+                'penjamaah1' => $penjamaah1,
+                'laiksehat0' => $laiksehat0,
+                'laiksehat1' => $laiksehat1,
+                'izin0' => $izin0,
+                'izin1' => $izin1
+            ];
+              return response()->json($response, Response::HTTP_OK);
+    }
+
 }

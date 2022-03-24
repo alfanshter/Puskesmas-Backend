@@ -45,4 +45,5 @@ Route::get('/readdamall', [DamController::class, 'readdamall']);
 Route::get('/readdamdesa/{desa?}', [DamController::class, 'readdamdesa']);
 Route::get('/readdamdetail/{id?}', [DamController::class, 'readdamdetail']);
 Route::get('/getdatadam/{desa?}', [DamController::class, 'getdatadam']);
+Route::get('/getdatadam_all', [DamController::class, 'getdatadam_all']);
 Route::post('/logout', [AuthController::class, 'logout']);
