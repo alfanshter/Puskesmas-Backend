@@ -124,7 +124,7 @@ class TpmControlller extends Controller
         }
     }
 
- public function getdatatpm(Request $request)
+    public function getdatatpm(Request $request)
     {
         $ikl0 =DB::table('tpms')->where('desa',$request->input('desa'))->where('ikl',"Memenuhi Syarat")->count();
         $ikl1 =DB::table('tpms')->where('desa',$request->input('desa'))->where('ikl',"Tidak Memenuhi Syarat")->count();
@@ -154,5 +154,37 @@ class TpmControlller extends Controller
             ];
               return response()->json($response, Response::HTTP_OK);
     }
+
+    public function getdatatpmall(Request $request)
+    {
+        $ikl0 =DB::table('tpms')->where('ikl',"Memenuhi Syarat")->count();
+        $ikl1 =DB::table('tpms')->where('ikl',"Tidak Memenuhi Syarat")->count();
+        $sampel0 =DB::table('tpms')->where('ujisampel',"Memenuhi Syarat")->count();
+        $sampel1 =DB::table('tpms')->where('ujisampel',"Tidak Memenuhi Syarat")->count();
+        $sampel2 =DB::table('tpms')->where('ujisampel',"Belum Uji Sampel")->count();
+        $penjamaah0 =DB::table('tpms')->where('sertifikatpenjamaah',"Ada")->count();
+        $penjamaah1 =DB::table('tpms')->where('sertifikatpenjamaah',"Belum Ada")->count();
+        $laiksehat0 =DB::table('tpms')->where('laiksehat',"Ada")->count();
+        $laiksehat1 =DB::table('tpms')->where('laiksehat',"Belum Ada")->count();
+        $izin0 =DB::table('tpms')->where('izinusaha',"Ada")->count();
+        $izin1 =DB::table('tpms')->where('izinusaha',"Belum Ada")->count();
+       
+        $response = [
+                'message' => 'data',
+                'ikl0' => $ikl0,
+                'ikl1' => $ikl1,
+                'sampel0' => $sampel0,
+                'sampel1' => $sampel1,
+                'sampel2' => $sampel2,
+                'penjamaah0' => $penjamaah0,
+                'penjamaah1' => $penjamaah1,
+                'laiksehat0' => $laiksehat0,
+                'laiksehat1' => $laiksehat1,
+                'izin0' => $izin0,
+                'izin1' => $izin1
+            ];
+              return response()->json($response, Response::HTTP_OK);
+    }
+
 
 }

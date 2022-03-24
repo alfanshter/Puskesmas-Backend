@@ -36,6 +36,7 @@ Route::get('/readtpmall', [TpmControlller::class, 'readtpmall']);
 Route::get('/readtpmdesa/{desa?}', [TpmControlller::class, 'readtpmdesa']);
 Route::get('/readtpmdetail/{id?}', [TpmControlller::class, 'readtpmdetail']);
 Route::get('/getdatatpm/{desa?}', [TpmControlller::class, 'getdatatpm']);
+Route::get('/getdatatpmall', [TpmControlller::class, 'getdatatpmall']);
 
 Route::post('/insertdam', [DamController::class, 'insertdam']);
 Route::post('/updatedam', [DamController::class, 'updatedam']);
